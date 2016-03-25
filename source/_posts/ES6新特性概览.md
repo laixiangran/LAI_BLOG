@@ -1,6 +1,6 @@
 ---
 title: ES6新特性概览
-date: 2016-03-25
+date: 2016-03-24 22:21:02
 tags:
 - ECMAScript6
 - JavaScript
