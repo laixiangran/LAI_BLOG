@@ -67,16 +67,16 @@ scheme: Mist
 
 # Social links
 social:
-  GitHub: https://github.com/laixiangran/laixiangran.github.io
+  gitHub: https://github.com/laixiangran
+  weibo: http://weibo.com/2182723877
   #Others:
 
 # Social Icons
 social_icons:
   enable: true
   # Icon Mappings
-  GitHub: GitHub
-  Twitter: twitter
-  Weibo: weibo
+  gitHub: gitHub
+  weibo: weibo
 
 
 # Sidebar Avatar
