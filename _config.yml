@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 前端技术之旅
+title: 技术之旅
 subtitle: 摆脱懒惰，实现价值！
 description: 摆脱懒惰，实现价值！
 author: 赖祥燃
@@ -63,8 +63,8 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: spfk
-#theme: next
+#theme: spfk
+theme: next
 
 feed:
   type: atom

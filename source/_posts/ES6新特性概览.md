@@ -7,7 +7,7 @@ tags:
 categories: JavaScript
 ---
 
-ECMAScript 6（以下简称ES6）是JavaScript语言的下一代标准，已经在2015年6月正式发布了。这篇文章就将带你领略下ES6新特性的风采，感慨前后端差异越来越小了。
+> ECMAScript 6（以下简称ES6）是JavaScript语言的下一代标准，已经在2015年6月正式发布了。这篇文章就将带你领略下ES6新特性的风采，感慨前后端差异越来越小了。
 
 <!-- more -->
 
@@ -16,15 +16,17 @@ ECMAScript 6（以下简称ES6）是JavaScript语言的下一代标准，已经�
 如果你会C#或者Java，你肯定知道lambda表达式，ES6中新增的箭头操作符=>便有异曲同工之妙。它简化了函数的书写。操作符左边为输入的参数，而右边则是进行的操作以及返回的值Inputs=>outputs。
 我们知道在JS中回调是经常的事，而一般回调又以匿名函数的形式出现，每次都需要写一个function，甚是繁琐。当引入箭头操作符后可以方便地写回调了。请看下面的例子：
 
-    var array = [1,2,3];
-    
-    // 传统写法写法
-    array.forEach(function(v) {
-        console.log(v);
-    });
-    
-    // ES6写法
-    array.forEach(v => console.log(v));
+```javascript
+var array = [1,2,3];
+
+// 传统写法
+array.forEach(function(v) {
+    console.log(v);
+});
+
+// ES6写法
+array.forEach(v => console.log(v));
+```
 
 ## 类的支持
 
@@ -32,36 +34,37 @@ ES6中添加了对类的支持，引入了class关 键字（其实class在JavaSc
 
 下面代码展示了类在ES6中的使用：
 
-    // 类的定义
-    class Animal {
-        // ES6中新型构造器
-        constructor(name) {
-            this.name = name;
-        }
-    
-        // 实例方法
-        sayName() {
-            console.log('My name is ' + this.name);
-        }
+```javascript
+// 类的定义
+class Animal {
+    // ES6中新型构造器
+    constructor(name) {
+        this.name = name;
     }
-    
-    // 类的继承
-    class Programmer extends Animal {
-        constructor(name) {
-            // 直接调用父类构造器进行初始化
-            super(name);
-        }
-        program() {
-            console.log("I'm coding...");
-        }
+    // 实例方法
+    sayName() {
+        console.log('My name is ' + this.name);
     }
-    
-    // 测试我们的类
-    var animal = new Animal('dummy'),
-        wayou = new Programmer('wayou');
-    animal.sayName(); // 输出 'My name is dummy'
-    wayou.sayName(); // 输出 'My name is wayou'
-    wayou.program(); // 输出 'I'm coding...'
+}
+
+// 类的继承
+class Programmer extends Animal {
+    constructor(name) {
+        // 直接调用父类构造器进行初始化
+        super(name);
+    }
+    program() {
+        console.log("I'm coding...");
+    }
+}
+
+// 测试我们的类
+var animal = new Animal('dummy'),
+    wayou = new Programmer('wayou');
+animal.sayName(); // 输出 'My name is dummy'
+wayou.sayName(); // 输出 'My name is wayou'
+wayou.program(); // 输出 'I'm coding...'
+```
  
 ## 增强的对象字面量
 
@@ -73,48 +76,51 @@ ES6中添加了对类的支持，引入了class关 键字（其实class在JavaSc
 
 这样一来，对象字面量与前面提到的类概念更加吻合，在编写面向对象的JavaScript时更加轻松方便了。
 
-    // 通过对象字面量创建对象
-    var human = { 
-        breathe() {
-            console.log('breathing...');
-        }
-    };
-    
-    var worker = { 
-        __proto__: human, // 设置此对象的原型为human, 相当于继承human
-        company: 'freelancer',
-        work() {
-            console.log('working...');
-        }
-    };
-    
-    human.breathe(); // 输出 'breathing...'
-    
-    // 调用继承来的breathe方法
-    worker.breathe(); // 输出 'breathing...'
+```javascript
+// 通过对象字面量创建对象
+var human = { 
+    breathe() {
+        console.log('breathing...');
+    }
+};
+var worker = { 
+    __proto__: human, // 设置此对象的原型为human, 相当于继承human
+    company: 'freelancer',
+    work() {
+        console.log('working...');
+    }
+};
+human.breathe(); // 输出 'breathing...'
+
+// 调用继承来的breathe方法
+worker.breathe(); // 输出 'breathing...'
+```
  
 ## 字符串模板
 
 字符串模板相对简单易懂些。ES6中允许使用反引号 \` 来创建字符串，此种方法创建的字符串里面可以包含由美元符号加花括号包裹的变量 `${vraible}`。如果你使用过像C#等后端强类型语言的话，对此功能应该不会陌生。
 
-    // 产生一个随机数
-    var num = Math.random();
-    
-    // 将这个数字输出到console 
-    console.log(`your num is ${num}`);
+```javascript
+// 产生一个随机数
+var num = Math.random();
+
+// 将这个数字输出到console 
+console.log(`your num is ${num}`);
+```
 
 ## 解构
 
 自动解析数组或对象中的值。比如若一个函数要返回多个值，常规的做法是返回一个对象，将每个值做为这个对象的属性返回。但在ES6中，利用解构这一特性，可以直接返回一个数组，然后数组中的值会自动被解析到对应接收该值的变量中。
 
-    function getVal() {
-        return[1,2];
-    }
-    var [x,y] = getVal(), // 函数返回值的解构
-    console.log('x:' + x + ', y:' + y); // 输出：x:1, y:2
-    
-    [name,,age] = ['wayou','male','secrect']; // 数组解构
-    console.log('name:' + name + ', age:' + age); //输出：name:wayou, age:secrect 
+```javascript
+function getVal() {
+    return[1,2];
+}
+var [x,y] = getVal(), // 函数返回值的解构
+console.log('x:' + x + ', y:' + y); // 输出：x:1, y:2
+[name,,age] = ['wayou','male','secrect']; // 数组解构
+console.log('name:' + name + ', age:' + age); //输出：name:wayou, age:secrect
+```
 
 ## 参数默认值，不定参数，拓展参数
 
@@ -122,20 +128,22 @@ ES6中添加了对类的支持，引入了class关 键字（其实class在JavaSc
 
 现在可以在定义函数的时候指定参数的默认值了，而不用像以前那样通过逻辑或操作符来达到目的了。
 
-    function sayHello(name) {
-        // 传统的指定默认参数的方式
-        var name = name || 'dude';
-        console.log('Hello ' + name);
-    }  
-    sayHello(); // 输出：Hello dude
-    sayHello('Wayou'); // 输出：Hello Wayou
-    
-    // 运用ES6的默认参数
-    function sayHello2(name = 'dude') {
-        console.log(`Hello${name}`);
-    }
-    sayHello2(); // 输出：Hello dude
-    sayHello2('Wayou'); // 输出：Hello Wayou
+```javascript
+function sayHello(name) {
+    // 传统的指定默认参数的方式
+    var name = name || 'dude';
+    console.log('Hello ' + name);
+}  
+sayHello(); // 输出：Hello dude
+sayHello('Wayou'); // 输出：Hello Wayou
+
+// 运用ES6的默认参数
+function sayHello2(name = 'dude') {
+    console.log(`Hello${name}`);
+}
+sayHello2(); // 输出：Hello dude
+sayHello2('Wayou'); // 输出：Hello Wayou
+```
  
 ### 不定参数
 
@@ -143,49 +151,57 @@ ES6中添加了对类的支持，引入了class关 键字（其实class在JavaSc
 
 比如下面这个例子中，…x代表了所有传入add函数的参数。
 
-    // 将所有参数相加的函数
-    function add(...x) {
-        return x.reduce((m,n) => m+n);
-    }
-    
-    // 传递任意个数的参数
-    console.log(add(1,2,3)); // 输出：6
-    console.log(add(1,2,3,4,5)); // 输出：15
+```javascript
+// 将所有参数相加的函数
+function add(...x) {
+    return x.reduce((m,n) => m+n);
+}
+
+// 传递任意个数的参数
+console.log(add(1,2,3)); // 输出：6
+console.log(add(1,2,3,4,5)); // 输出：15
+```
  
 ### 拓展参数
 
 拓展参数则是另一种形式的语法糖，它允许传递数组或者类数组直接做为函数的参数而不用通过apply。
 
-    var people = ['Wayou','John','Sherlock'];
-    
-    // sayHello函数本来接收三个单独的参数人一，人二和人三
-    function sayHello(people1, people2, people3) {
-        console.log(`Hello${people1}, ${people2}, ${people3}`);
-    }
-    
-    // 但是我们将一个数组以拓展参数的形式传递，它能很好地映射到每个单独的参数
-    sayHello(...people); // 输出：Hello Wayou,John,Sherlock
-    
-    // 而在以前，如果需要传递数组当参数，我们需要使用函数的apply方法
-    sayHello.apply(null, people); // 输出：Hello Wayou,John,Sherlock 
+```javascript
+var people = ['Wayou','John','Sherlock'];
+
+// sayHello函数本来接收三个单独的参数人一，人二和人三
+function sayHello(people1, people2, people3) {
+    console.log(`Hello${people1}, ${people2}, ${people3}`);
+}
+
+// 但是我们将一个数组以拓展参数的形式传递，它能很好地映射到每个单独的参数
+sayHello(...people); // 输出：Hello Wayou,John,Sherlock
+
+// 而在以前，如果需要传递数组当参数，我们需要使用函数的apply方法
+sayHello.apply(null, people); // 输出：Hello Wayou,John,Sherlock
+```
 
 ## let与const 关键字
 
 可以把let看成var，只是它定义的变量被限定在了特定范围内才能使用，而离开这个范围则无效。const则很直观，用来定义常量，即无法被更改值的变量。
 
-    for (let i=0; i<2; i++) {
-        console.log(i); // 输出: 0,1
-    }
-    console.log(i); // 输出：undefined,严格模式下会报错
+```javascript
+for (let i=0; i<2; i++) {
+    console.log(i); // 输出: 0,1
+}
+console.log(i); // 输出：undefined,严格模式下会报错
+```
 
 ## for of 值遍历
 
 我们都知道for in循环用于遍历数组，类数组或对象，ES6中新引入的for of循环功能相似，不同的是每次循环它提供的不是序号而是值。
 
-    var someArray = ["a","b","c"];
-    for (v of someArray) {
-        console.log(v); // 输出 a,b,c
-    }
+```javascript
+var someArray = ["a","b","c"];
+for (v of someArray) {
+    console.log(v); // 输出 a,b,c
+}
+```
 
 ## iterator, generator
 
@@ -205,72 +221,78 @@ ES6中添加了对类的支持，引入了class关 键字（其实class在JavaSc
 
 将不同功能的代码分别写在不同文件中，各模块只需导出公共接口部分，然后通过模块的导入的方式可以在其他地方使用。
 
-    // point.js
-    module "point" {
-        export class Point {
-            constructor(x,y) {
-                public x=x;
-                public y=y;
-            }
+```javascript
+// point.js
+module "point" {
+    export class Point {
+        constructor(x,y) {
+            public x=x;
+            public y=y;
         }
     }
-    
-    // myapp.js
-    
-    // 声明引用的模块 
-    module point from "/point.js";
-    
-    // 这里可以看出，尽管声明了引用的模块，还是可以通过指定需要的部分进行导入
-    import Point from "point";
-    var origin = new Point(0,0);
-    console.log(origin);
+}
+
+// myapp.js
+// 声明引用的模块 
+module point from "/point.js";
+
+// 这里可以看出，尽管声明了引用的模块，还是可以通过指定需要的部分进行导入
+import Point from "point";
+var origin = new Point(0,0);
+console.log(origin);
+```
 
 ## Map，Set 和 WeakMap，WeakSet
 
 这些是新加的集合类型，提供了更加方便的获取属性值的方法，不用像以前一样用hasOwnProperty来检查某个属性是属于原型链上的呢还是当前对象的。同时，在进行属性值添加与获取时有专门的get，set方法。
 
-    // Sets 
-    var s = new Set();
-    s.add("hello").add("goodbye");
-    s.size === 2;
-    s.has("hello") === true;
-    
-    // Maps
-    var m = new Map();
-    m.set("hello", 42);
-    m.set(s, 34);
-    m.get(s) == 34;
+```javascript
+// Sets 
+var s = new Set();
+s.add("hello").add("goodbye");
+s.size === 2;
+s.has("hello") === true;
+
+// Maps
+var m = new Map();
+m.set("hello", 42);
+m.set(s, 34);
+m.get(s) == 34;
+```
 
 有时候我们会把对象作为一个对象的键用来存放属性值，普通集合类型比如简单对象会阻止垃圾回收器对这些作为属性键存在的对象的回收，有造成内存泄漏的危险。而WeakMap,WeakSet则更加安全些，这些作为属性键的对象如果没有别的变量在引用它们，则会被回收释放掉，具体还看下面的例子：
 
-    // Weak Maps
-    var wm = new WeakMap();
-    wm.set(s, {extra: 42});
-    wm.size === undefined // 对象释放了
-    
-    // Weak Sets
-    var ws = new WeakSet();
-    ws.add({data: 42}); // 因为添加到ws的这个临时对象没有其他变量引用它，所以ws不会保存它的值，也就是说这次添加其实没有意思
+```javascript
+// Weak Maps
+var wm = new WeakMap();
+wm.set(s, {extra: 42});
+wm.size === undefined // 对象释放了
+
+// Weak Sets
+var ws = new WeakSet();
+ws.add({data: 42}); // 因为添加到ws的这个临时对象没有其他变量引用它，所以ws不会保存它的值，也就是说这次添加其实没有意思
+```
  
 ## Proxies
 
 Proxy可以监听对象身上发生了什么事情，并在这些事情发生后执行一些相应的操作。一下子让我们对一个对象有了很强的追踪能力，同时在数据绑定方面也很有用处。
 
-    // 定义被侦听的目标对象
-    var engineer = {name: 'Joe Sixpack', salary: 50};
-    
-    // 定义处理程序
-    var interceptor = {set: function(receiver, property, value) {
-        console.log(property, 'is changed to', value);
-        receiver[property] = value;
-        }
-    };
-    
-    // 创建代理以进行侦听
-    engineer = Proxy(engineer, interceptor);
-    
-    //做一些改动来触发代理
-    engineer.salary = 60; // 控制台输出：salary is changed to 60
+```javascript
+// 定义被侦听的目标对象
+var engineer = {name: 'Joe Sixpack', salary: 50};
+
+// 定义处理程序
+var interceptor = {set: function(receiver, property, value) {
+    console.log(property, 'is changed to', value);
+    receiver[property] = value;
+    }
+};
+
+// 创建代理以进行侦听
+engineer = Proxy(engineer, interceptor);
+//做一些改动来触发代理
+engineer.salary = 60; // 控制台输出：salary is changed to 60
+```
 
 上面代码我已加了注释，这里进一步解释。对于处理程序，是在被侦听的对象身上发生了相应事件之后，处理程序里面的方法就会被调用，上面例子中我们设置了set的处理函数，表明，如果我们侦听的对象的属性被更改，也就是被set了，那这个处理程序就会被调用，同时通过参数能够得知是哪个属性被更改，更改为了什么值。
 
@@ -278,91 +300,98 @@ Proxy可以监听对象身上发生了什么事情，并在这些事情发生后
 
 我们知道对象其实是键值对的集合，而键通常来说是字符串。而现在除了字符串外，我们还可以用symbol这种值来做为对象的键。Symbol是一种 基本类型，像数字，字符串还有布尔一样，它不是一个对象。Symbol 通过调用symbol函数产生，它接收一个可选的名字参数，该函数返回的symbol是唯一的。之后就可以用这个返回值做为对象的键了。Symbol还可以用来创建私有属性，外部无法直接访问由symbol做为键的属性值。
 
-    (function() {
-        // 创建 symbol
-        var key = Symbol("key");
-        function MyClass(privateData) {
-            this[key] = privateData;
+```javascript
+(function() {
+    // 创建 symbol
+    var key = Symbol("key");
+    function MyClass(privateData) {
+        this[key] = privateData;
+    }
+    MyClass.prototype = {
+        doStuff: function() {
+            ...this[key]...
         }
-        MyClass.prototype = {
-            doStuff: function() {
-                ...this[key]...
-            }
-        };
-    })();
-    var c = new MyClass("hello");
-    c["key"] === undefined //无法访问该属性，因为是私有的
+    };
+})();
+var c = new MyClass("hello");
+c["key"] === undefined //无法访问该属性，因为是私有的
+```
  
 ## Math，Number，String，Object 的新API
 
 对Math,Number,String还有Object等添加了许多新的API。
 
-    // Number
-    // 不同的两个Number之间的最小的差
-    Number.EPSILON
-    
-    // 判断是否是整数
-    Number.isInteger(Infinity) // false
-    
-    // 判断是否为非数字
-    Number.isNaN("NaN") // false
-    
-    // Math
-    Math.acosh(3) // 1.762747174039086
-    Math.hypot(3,4) // 5
-    Math.imul(Math.pow(2,32)-1, Math.pow(2,32)-2) // 2
-    
-    // String
-    "abcde".contains("cd") // true
-    "abc".repeat(3) // "abcabcabc"
-    
-    // Array
-    // 将一个类数组对象或可迭代对象转换成真实的数组
-    Array.from(document.querySelectorAll('*'))
-    
-    // 将它的任意类型的多个参数放在一个数组里并返回
-    Array.of(1,2,3)
-    
-    // 将一个数组中指定区间的所有元素的值, 都替换成或者说填充成为某个固定的值
-    [0,0,0].fill(7,1) // [0,7,7]
-    
-    // 用来查找数组中某指定元素的索引, 如果找不到指定的元素, 则返回 -1
-    [1,2,3].findIndex(x => x == 2) // 1
-    
-    // 返回一个 Array Iterator 对象，该对象包含数组中每一个索引的键值对
-    ["a","b","c"].entries() // iterator [0, "a"], [1,"b"], [2,"c"]
-    
-    // 返回一个数组索引的迭代器
-    ["a","b","c"].keys() // iterator 0, 1, 2
-    
-    // 返回一个新的 Array Iterator 对象，该对象包含数组每个索引的值
-    ["a","b","c"].values() // iterator "a", "b", "c"
-    
-    // Object
-    Object.assign(Point, {origin: new Point(0,0)})
+```javascript
+// Number
+// 不同的两个Number之间的最小的差
+Number.EPSILON
+
+// 判断是否是整数
+Number.isInteger(Infinity) // false
+
+// 判断是否为非数字
+Number.isNaN("NaN") // false
+
+// Math
+Math.acosh(3) // 1.762747174039086
+Math.hypot(3,4) // 5
+Math.imul(Math.pow(2,32)-1, Math.pow(2,32)-2) // 2
+
+// String
+"abcde".contains("cd") // true
+"abc".repeat(3) // "abcabcabc"
+
+// Array
+// 将一个类数组对象或可迭代对象转换成真实的数组
+Array.from(document.querySelectorAll('*'))
+
+// 将它的任意类型的多个参数放在一个数组里并返回
+Array.of(1,2,3)
+
+// 将一个数组中指定区间的所有元素的值, 都替换成或者说填充成为某个固定的值
+[0,0,0].fill(7,1) // [0,7,7]
+
+// 用来查找数组中某指定元素的索引, 如果找不到指定的元素, 则返回 -1
+[1,2,3].findIndex(x => x == 2) // 1
+
+// 返回一个 Array Iterator 对象，该对象包含数组中每一个索引的键值对
+["a","b","c"].entries() // iterator [0, "a"], [1,"b"], [2,"c"]
+
+// 返回一个数组索引的迭代器
+["a","b","c"].keys() // iterator 0, 1, 2
+
+// 返回一个新的 Array Iterator 对象，该对象包含数组每个索引的值
+["a","b","c"].values() // iterator "a", "b", "c"
+
+// Object
+Object.assign(Point, {origin: new Point(0,0)})
+```
+
  
 ## Promises
 
 Promises是处理异步操作的一种模式，之前在很多三方库中有实现，比如jQuery的deferred 对象。当你发起一个异步请求，并绑定了.when(), .done()等事件处理程序时，其实就是在应用promise模式。
 
-    // 创建 promise
-    var promise = new Promise(function(resolve,reject) {
-        // 进行一些异步或耗时操作
-        if(/*如果成功 */) {
-            resolve("Stuff worked!");
-        } else {
-            reject(Error("It broke"));
-        }
-    });
-    
-    // 绑定处理程序
-    promise.then(function(result) {
-        // promise成功的话会执行这里
-        console.log(result); // "Stuff worked!"
-    }, function(err) {
-        // promise失败会执行这里
-        console.log(err); // Error: "It broke"
-    });
+```javascript
+// 创建 promise
+var promise = new Promise(function(resolve,reject) {
+    // 进行一些异步或耗时操作
+    if(/*如果成功 */) {
+        resolve("Stuff worked!");
+    } else {
+        reject(Error("It broke"));
+    }
+});
+
+// 绑定处理程序
+promise.then(function(result) {
+    // promise成功的话会执行这里
+    console.log(result); // "Stuff worked!"
+}, function(err) {
+    // promise失败会执行这里
+    console.log(err); // Error: "It broke"
+});
+```
 
 ## 资料
 
