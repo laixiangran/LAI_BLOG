@@ -117,14 +117,6 @@ Markdown 支持两种标题的语法，类 Setext 和类 atx 形式。
     This is an H2
     -------------
     
-**效果：**
-
-This is an H1
-=============
-
-This is an H2
--------------
-    
 任何数量的 `=` 和 `-` 都可以有效果。
 
 类 Atx 形式则是在行首插入 1 到 6 个 `#` ，对应到标题 1 到 6 阶，例如：
@@ -134,14 +126,6 @@ This is an H2
     ## 这是 H2
     
     ###### 这是 H6
-    
-**效果：**
-
-# 这是 H1
-
-## 这是 H2
-
-###### 这是 H6
 
 你可以选择性地「闭合」类 atx 样式的标题，这纯粹只是美观用的，若是觉得这样看起来比较舒适，你就可以在行尾加上 `#`，而行尾的 `#` 数量也不用和开头一样（行首的井字符数量决定标题的阶数）：
 
@@ -150,16 +134,6 @@ This is an H2
     ## 这是 H2 ##
     
     ### 这是 H3 ######
-    
-**效果：**
-
-# 这是 H1 #
-    
-## 这是 H2 ##
-
-### 这是 H3 ######
-    
-## 区块引用 Blockquotes
 
 Markdown 标记区块引用是使用类似 email 中用 > 的引用方式。如果你还熟悉在 email 信件中的引言部分，你就知道怎么在 Markdown 文件中建立一个区块引用，那会看起来像是你自己先断好行，然后在每行的最前面加上 `>` ：
 
@@ -463,60 +437,6 @@ Markdown 会转换成：
     
     这是一个代码区块。
     
-还有一种写法，我想的是为了代码高亮的效果更好，使用 **```语言**来建立代码区块，如下：
-
-    ```javascript
-    function test() {
-        console.log("hello world!");
-    }
-    ```
-    
-    ```html
-    <p>我是p</p>
-    ```
-    
-    ```css
-    img {
-        width: 100px;
-    }
-    #main {
-        color: red;
-    }
-    .test {
-        background-color: whiter;
-    }
-    ```
-    
-**效果：**
-
-### JavaScript
-
-```javascript
-function test() {
-    console.log("hello world!");
-}
-```
-
-### HTML
-
-```html
-<p>我是p</p>
-```
-
-### CSS
-
-```css
-img {
-    width: 100px;
-}
-#main {
-    color: red;
-}
-.test {
-    background-color: whiter;
-}
-```
-    
 这个每行一阶的缩进（4 个空格或是 1 个制表符），都会被移除，例如：
 
     Here is an example of AppleScript:
@@ -529,10 +449,12 @@ img {
 
     <p>Here is an example of AppleScript:</p>
     
-    <pre><code>tell application "Foo"
-        beep
-    end tell
-    </code></pre>
+    <pre>
+        <code>tell application "Foo"
+            beep
+        end tell
+    </code>
+    </pre>
     
 **效果：**
 
