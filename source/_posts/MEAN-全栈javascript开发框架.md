@@ -10,10 +10,6 @@ tags:
 categories: JavaScript
 ---
 
-> MEAN是一个Javascript平台的现代Web开发框架总称，它是MongoDB + Express +AngularJS + NodeJS 四个框架的第一个字母组合。它与传统LAMP一样是一种全套开发工具的简称。
-
-<!-- more -->
-
 ## 引言
 
 使用JavaScript能够完整迅速做出Web应用程序，目前一套工具包括MongoDB、ExpressJS，AngularJS和Node.js越来越受到欢迎，其开发的灵活性和易用性加快开发效率，简化开发者的工作。

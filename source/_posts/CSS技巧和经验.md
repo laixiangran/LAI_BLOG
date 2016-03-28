@@ -5,10 +5,6 @@ tags: CSS
 categories: CSS
 ---
 
-> CSS技巧和经验
-
-<!-- more -->
-
 ## 如何清除图片下方出现几像素的空白间隙
 
 ### 方法1
