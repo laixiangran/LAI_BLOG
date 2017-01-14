@@ -5,6 +5,19 @@
   "hexo": {
     "version": "3.2.0"
   },
+  "scripts": {
+    "precreat": "npm run generate",
+    "creat": "gulp generate",
+    "push": "concurrently \"gulp deploy\" \"npm run deploy\" ",
+    "init": "hexo init",
+    "new": "hexo new",
+    "generate": "hexo generate",
+    "publish": "hexo publish",
+    "server": "hexo server",
+    "deploy": "hexo deploy",
+    "render": "hexo render",
+    "clean": "hexo clean"
+  },
   "dependencies": {
     "hexo": "^3.2.0",
     "hexo-deployer-git": "^0.1.0",
@@ -17,5 +30,9 @@
     "hexo-renderer-marked": "^0.2.10",
     "hexo-renderer-stylus": "^0.3.1",
     "hexo-server": "^0.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.1.0",
+    "gulp": "^3.9.1"
   }
 }
