@@ -1,13 +1,12 @@
 {
-  "name": "hexo-site",
-  "version": "0.0.0",
+  "name": "LAI_BLOG",
+  "version": "1.0.0",
   "private": true,
   "hexo": {
     "version": "3.2.0"
   },
   "scripts": {
-    "precreat": "npm run generate",
-    "creat": "gulp generate",
+    "creat": "npm run generate && gulp generate",
     "push": "concurrently \"gulp deploy\" \"npm run deploy\" ",
     "init": "hexo init",
     "new": "hexo new",
