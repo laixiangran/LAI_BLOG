@@ -50,7 +50,7 @@ npm install（等待依赖包安装完成，再进行下一步）
 npm start
 ```
 
-**为了启动方便，在`package.json`的`scripts`配置了`"start": "ng serve --hmr -o --proxy-config proxy.config.json"`，可以看到这条命令分别配置了--hmr（启动模块热更新）、-o（自动打开浏览器）、--proxy-config（代理配置）**
+**为了启动方便，在`package.json`的`scripts`配置了`"start": "ng serve --hmr -o --proxy-config proxy.config.json"`，可以看到这条命令分别配置了[--hmr（启动模块热更新）](https://github.com/angular/angular-cli/wiki/stories-configure-hmr)、-o（自动打开浏览器）、[--proxy-config（代理配置）](https://github.com/angular/angular-cli/wiki/stories-proxy)**
 
 控制台信息：
 ![控制台信息](http://www.laixiangran.cn/images/angular/1.png)
