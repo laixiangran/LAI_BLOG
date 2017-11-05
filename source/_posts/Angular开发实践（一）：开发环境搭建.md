@@ -58,6 +58,31 @@ npm start
 浏览器界面：
 ![浏览器界面](http://www.laixiangran.cn/images/angular/2.png)
 
+项目启动成功了，你可以进行下面的开发了。可能你还想了解下该项目中的文件都是干什么用的，那么我们就来了解下。
+
+# 项目文件概览
+
+## src文件夹
+
+应用代码位于`src`文件夹中。所有的Angular组件、模板、样式、图片以及应用所需的任何东西都在这里。这个文件夹之外的文件都是为构建应用提供支持用的。
+
+![src目录](http://www.laixiangran.cn/images/angular/src.png)
+
+文件 | 用途
+---|---
+`app/app.component.{ts,html,css,spec.ts}` | 使用HTML模板、CSS样式和单元测试定义`AppComponent`组件。 它是根组件，随着应用的成长它会成为一棵组件树的根节点。
+`app/app.module.ts` | 定义`AppModule`，这个根模块会告诉Angular如何组装该应用
+`components/*` | 这个文件夹下放置应用级通用组件
+
+## 根目录
+
+`src/`文件夹是项目的根文件夹之一。其它文件是用来帮助我们构建、测试、维护、文档化和发布应用的。它们放在根目录下，和`src/`平级。
+
+![根目录](http://www.laixiangran.cn/images/angular/root.png)
+
+
+
+
 
 
 
