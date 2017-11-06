@@ -6,6 +6,7 @@
     "version": "3.2.0"
   },
   "scripts": {
+    "release": "npm run creat && npm run push",
     "creat": "npm run generate && gulp generate",
     "push": "concurrently \"gulp deploy\" \"npm run deploy\" ",
     "init": "hexo init",

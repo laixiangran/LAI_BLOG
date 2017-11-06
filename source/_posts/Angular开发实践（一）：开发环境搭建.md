@@ -50,7 +50,7 @@ npm install（等待依赖包安装完成，再进行下一步）
 npm start
 ```
 
-**为了启动方便，在`package.json`的`scripts`配置了`"start": "ng serve --hmr -o --proxy-config proxy.config.json"`，可以看到这条命令分别配置了[--hmr（启动模块热更新）](https://github.com/angular/angular-cli/wiki/stories-configure-hmr)、-o（自动打开浏览器）、[--proxy-config（代理配置）](https://github.com/angular/angular-cli/wiki/stories-proxy)**
+**为了启动方便，在`package.json`的`scripts`配置了`"start": "ng serve --hmr -o --proxy-config proxy.config.json"`，可以看到这条命令分别配置了[--hmr（启动模块热更新）](http://www.laixiangran.cn/2017/11/06/Angular%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AHot%20Module%20Replacement%EF%BC%88%E6%A8%A1%E5%9D%97%E7%83%AD%E6%9B%BF%E6%8D%A2%EF%BC%89%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/)、-o（自动打开浏览器）、[--proxy-config（代理配置）](https://github.com/angular/angular-cli/wiki/stories-proxy)**
 
 控制台信息：
 ![控制台信息](http://www.laixiangran.cn/images/angular/1.png)
@@ -80,7 +80,7 @@ npm start
 `assets/*` | 这个文件夹下你可以放字体、图片等任何静态文件，在构建应用时，它们全都会拷贝到发布包中
 `environments/*` | 这个文件夹中包括为各个目标环境准备的文件，它们导出了一些应用中要用到的配置变量。这些文件会在构建应用时被替换。比如你可能在开发环境、测试环境及生产环境中使用不同的后端API地址
 `favicon.ico` | 显示在书签栏中的网站图标
-`hmr.ts` | [HMR（模块热更新）](https://github.com/angular/angular-cli/wiki/stories-configure-hmr)的启动器，将在`main.ts`中用来起动应用
+`hmr.ts` | [HMR](http://www.laixiangran.cn/2017/11/06/Angular%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AHot%20Module%20Replacement%EF%BC%88%E6%A8%A1%E5%9D%97%E7%83%AD%E6%9B%BF%E6%8D%A2%EF%BC%89%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/)的启动器，将在`main.ts`中用来起动应用
 `index.html` | 网站的主页面。大多数情况下你都不用编辑它。在构建应用时，CLI会自动把所有js和css文件添加进去，所以你不必在这里手动添加任何`<script>`或`<link>`标签
 `main.ts` | 这是应用的主要入口点。使用[JIT compiler](https://angular.cn/guide/glossary#jit)或者[AOT compiler](https://angular.cn/guide/glossary#ahead-of-time-aot-compilation)编译器编译本应用，并启动应用的根模块AppModule（启用HMR时，将使用`hmr.ts`定义的启动器启动），使其运行在浏览器中
 `polyfills.ts` | 不同的浏览器对Web标准的支持程度也不同。填充库（polyfill）能帮我们把这些不同点进行标准化。 你只要使用core-js 和 zone.js通常就够了，不过你也可以查看[浏览器支持指南](https://angular.cn/guide/browser-support)以了解更多信息
