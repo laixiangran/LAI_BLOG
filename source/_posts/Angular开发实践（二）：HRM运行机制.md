@@ -1,5 +1,5 @@
 ---
-title: Angular开发实践（二）：Hot Module Replacement（模块热替换）运行机制
+title: Angular开发实践（二）：HRM运行机制
 date: 2017-11-06 20:30:30
 tags:
 - Angular
