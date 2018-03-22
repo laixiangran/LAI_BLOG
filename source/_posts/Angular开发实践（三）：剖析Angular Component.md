@@ -99,6 +99,7 @@ Angular Component属于指令的一种，可以理解为拥有模板的指令。
 })
 export class DemoComponent {}
 ```
+
 - 组件装饰器：每个组件类必须用`@component`进行装饰才能成为Angular组件。
 - 组件元数据：组件元数据：`selector`、`template`等，下文将着重讲解每个元数据的含义。
 - 组件类：组件实际上也是一个普通的类，组件的逻辑都在组件类里定义并实现。
