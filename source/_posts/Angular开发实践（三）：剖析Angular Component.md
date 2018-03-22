@@ -16,10 +16,10 @@ categories: Angular
 - W3C为统一组件化标准方式，提出Web Component的标准。
 - 每个组件包含自己的html、css、js代码。
 - Web Component标准包括以下四个重要的概念：
-    - Custom Elements（自定义标签）：可以创建自定义 HTML 标记和元素；
-    - HTML Templates（HTML模版）：使用 <template> 标签去预定义一些内容，但并不加载至页面，而是使用 JS 代码去初始化它；
-    - Shadow DOM（虚拟DOM）：可以创建完全独立与其他元素的DOM子树；
-    - HTML Imports（HTML导入）：一种在 HTML 文档中引入其他 HTML 文档的方法，<link rel=“import” href=“example.html” />。
+1. Custom Elements（自定义标签）：可以创建自定义 HTML 标记和元素；
+1. HTML Templates（HTML模版）：使用 `<template>` 标签去预定义一些内容，但并不加载至页面，而是使用 JS 代码去初始化它；
+1. Shadow DOM（虚拟DOM）：可以创建完全独立与其他元素的DOM子树；
+1. HTML Imports（HTML导入）：一种在 HTML 文档中引入其他 HTML 文档的方法，`<link rel="import" href="example.html" />`。
 
 概括来说就是，可以创建自定义标签来引入组件是前端组件化的基础，在页面引用 HTML 文件和 HTML 模板是用于支撑编写组件视图和组件资源管理，而 Shadow DOM 则是隔离组件间代码的冲突和影响。
 
@@ -111,29 +111,29 @@ export class DemoComponent {}
 
 名称 | 类型 | 作用
 ---|---|---
-animations | AnimationEntryMetadata[] | 设置组件的动画
-changeDetection | ChangeDetectionStrategy | 设置组件的变化监测策略
-encapsulation | ViewEncapsulation | 设置组件的视图包装选项
-entryComponents | any[] | 设置将被动态插入到该组件视图中的组件列表
-interpolation | [string, string] | 自定义组件的插值标记，默认是双大括号{{}}
-moduleId | string | 设置该组件在 ES/CommonJS 规范下的模块id，它被用于解析模板样式的相对路径
-styleUrls | string[] | 设置组件引用的外部样式文件
-styles | string[] | 设置组件使用的内联样式
-template | string | 设置组件的内联模板
-templateUrl | string | 设置组件模板所在路径
-viewProviders | Provider[] | 设置组件及其所有子组件（不含ContentChildren）可用的服务
+animations | `AnimationEntryMetadata[]` | 设置组件的动画
+changeDetection | `ChangeDetectionStrategy` | 设置组件的变化监测策略
+encapsulation | `ViewEncapsulation` | 设置组件的视图包装选项
+entryComponents | `any[]` | 设置将被动态插入到该组件视图中的组件列表
+interpolation | `[string, string]` | 自定义组件的插值标记，默认是双大括号
+moduleId | `string` | 设置该组件在 ES/CommonJS 规范下的模块id，它被用于解析模板样式的相对路径
+styleUrls | `string[]` | 设置组件引用的外部样式文件
+styles | `string[]` | 设置组件使用的内联样式
+template | `string` | 设置组件的内联模板
+templateUrl | `string` | 设置组件模板所在路径
+viewProviders | `Provider[]` | 设置组件及其所有子组件（不含ContentChildren）可用的服务
 
 ### 从 core/Directive 继承
 
 名称 | 类型 | 作用
 ---|---|---
-exportAs | string | 设置组件实例在模板中的别名，使得可以在模板中调用
-host | {[key: string]: string} | 设置组件的事件、动作和属性等
-inputs | string[] | 设置组件的输入属性
-outputs | string[] | 设置组件的输出属性
-providers | Provider[] | 设置组件及其所有子组件（含ContentChildren）可用的服务（依赖注入）
-queries | {[key: string]: any} | 设置需要被注入到组件的查询
-selector | string | 设置用于在模板中识别该组件的css选择器（组件的自定义标签）
+exportAs | `string` | 设置组件实例在模板中的别名，使得可以在模板中调用
+host | `{[key: string]: string}` | 设置组件的事件、动作和属性等
+inputs | `string[]` | 设置组件的输入属性
+outputs | `string[]` | 设置组件的输出属性
+providers | `Provider[]` | 设置组件及其所有子组件（含ContentChildren）可用的服务（依赖注入）
+queries | `{[key: string]: any}` | 设置需要被注入到组件的查询
+selector | `string` | 设置用于在模板中识别该组件的css选择器（组件的自定义标签）
 
 ### 几种元数据详解
 
@@ -315,7 +315,7 @@ export class MyListComponent {
 
 - ChangeDetectionStrategy.Default：组件的每次变化监测都会检查其内部的所有数据（引用对象也会深度遍历），以此得到前后的数据变化。
 
-- ChangeDetectionStrategy.OnPush：组件的变化监测只检查输入属性（即@Input修饰的变量）的值是否发生变化，当这个值为引用类型（Object，Array等）时，则只对比该值的引用。
+- ChangeDetectionStrategy.OnPush：组件的变化监测只检查输入属性（即`@Input`修饰的变量）的值是否发生变化，当这个值为引用类型（Object，Array等）时，则只对比该值的引用。
 
 - 显然，OnPush策略相比Default降低了变化监测的复杂度，很好地提升了变化监测的性能。如果组件的更新只依赖输入属性的值，那么在该组件上使用OnPush策略是一个很好的选择。
 
@@ -333,7 +333,7 @@ export class MyListComponent {
 
 生命周期钩子 | 调用时机
 ---|---
-ngOnChanges | 在ngOnInit之前调用，或者当组件输入数据（通过@Input装饰器显式指定的那些变量）变化时调用。
+ngOnChanges | 在ngOnInit之前调用，或者当组件输入数据（通过`@Input`装饰器显式指定的那些变量）变化时调用。
 ngOnInit | 第一次ngOnChanges之后调用。**建议此时获取数据，不要在构造函数中获取**。
 ngDoCheck | 每次变化监测发生时被调用。
 ngAfterContentInit | 使用<ng-content>将外部内容嵌入到组件视图后被调用，第一次ngDoCheck之后调用且只执行一次（只适用组件）。
