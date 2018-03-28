@@ -15,7 +15,7 @@ Angular在服务端渲染方面提供一套前后端同构解决方案，它就�
 
 而 Angular Universal 会在服务端通过一个被称为服务端渲染（server-side rendering - SSR）的过程生成静态的应用页面。
 
-它可以生成这些页面，并在浏览器请求时直接用它们给出响应。 它也可以把页面预先生成为 HTML 文件，然后把它们作为静态文件供服务器使用。
+它可以生成这些页面，并在浏览器请求时直接用它们给出响应。 它也可以把页面预先生成为 HTML 文件，然后把它们作为静态文件供服务端使用。
 
 ### 工作原理
 
@@ -79,7 +79,7 @@ Angular Universal 可以为你生成应用的静态版本，它易搜索、可�
 
 - `@angular/platform-server` - Universal 的服务端元件。
 - `@nguniversal/module-map-ngfactory-loader` - 用于处理服务端渲染环境下的惰性加载。
-- `@nguniversal/express-engine` - Universal 应用的 Express 引擎。
+- `@nguniversal/express-engine` - Universal 应用的 [Express 引擎](https://github.com/angular/universal/tree/master/modules/express-engine)。
 - `ts-loader` - 用于对服务端应用进行转译。
 - `express` - Node Express 服务器
 
@@ -334,6 +334,28 @@ app.listen(PORT, () => {
 });
 ```
 
+##### Universal 模板引擎
+
+这个文件中最重要的部分是 ngExpressEngine 函数：
+
+```javascript
+app.engine('html', ngExpressEngine({
+    bootstrap: AppServerModuleNgFactory,
+    providers: [
+        provideModuleMap(LAZY_MODULE_MAP)
+    ]
+}));
+```
+ngExpressEngine 是对 Universal 的 renderModuleFactory 函数的封装。它会把客户端请求转换成服务端渲染的 HTML 页面。**如果你使用不同于Node的服务端技术，你需要在该服务端的模板引擎中调用这个函数。**
+
+- 第一个参数是你以前写过的 AppServerModule。 它是 Universal 服务端渲染器和你的应用之间的桥梁。
+
+- 第二个参数是 extraProviders。它是在这个服务器上运行时才需要的一些可选的 Angular 依赖注入提供商。当你的应用需要那些只有当运行在服务器实例中才需要的信息时，就要提供 extraProviders 参数。
+
+ngExpressEngine 函数返回了一个会解析成渲染好的页面的承诺（Promise）。
+
+接下来你的引擎要决定拿这个页面做点什么。 现在这个引擎的回调函数中，把渲染好的页面返回给了 Web 服务器，然后服务器通过 HTTP 响应把它转发给了客户端。
+
 #### 8、创建服务端预渲染的程序：`prerender.ts`
 
 ```javascript
@@ -477,15 +499,21 @@ export const ROUTES = [
 
 因此，从dist目录可以看到，服务端预渲染会根据配置好的路由在 browser 生成对应的静态index.html。如 `/` 对应 `/index.html`，`/lazy` 对应 `/lazy/index.html`。
 
-## 服务器到客户端的状态传输
+## 服务端的模块懒加载
 
-在前面的介绍中，我们在 `app.server.module.ts` 中导入了 `ServerTransferStateModule`，在 `app.module.ts` 中导入了 `BrowserTransferStateModule` 和 `TransferHttpCacheModule`。
+在前面的介绍中，我们在 `app.server.module.ts` 中导入了 [ModuleMapLoaderModule](https://github.com/angular/universal/tree/master/modules/module-map-ngfactory-loader)，在 `app.module.ts`。
 
-这三个模块都与服务器到客户端的状态传输有关：
+`ModuleMapLoaderModule` 模块可以使得懒加载的模块也可以在服务端进行渲染，而你要做也只是在 `app.server.module.ts` 中导入。
 
-- `ServerTransferStateModule`：在服务端导入，用于实现将状态从服务器传输到客户端
-- `BrowserTransferStateModule`：在客户端导入，用于实现将状态从服务器传输到客户端
-- `TransferHttpCacheModule`：用于实现服务器到客户端的请求传输缓存，防止客户端重复请求服务端已完成的请求
+## 服务端到客户端的状态传输
+
+在前面的介绍中，我们在 `app.server.module.ts` 中导入了 `ServerTransferStateModule`，在 `app.module.ts` 中导入了 `BrowserTransferStateModule` 和 [TransferHttpCacheModule](https://github.com/angular/universal/tree/master/modules/common)。
+
+这三个模块都与服务端到客户端的状态传输有关：
+
+- `ServerTransferStateModule`：在服务端导入，用于实现将状态从服务端传输到客户端
+- `BrowserTransferStateModule`：在客户端导入，用于实现将状态从服务端传输到客户端
+- `TransferHttpCacheModule`：用于实现服务端到客户端的请求传输缓存，防止客户端重复请求服务端已完成的请求
 
 使用这几个模块，可以解决 **http请求在服务端和客户端分别请求一次** 的问题。
 
