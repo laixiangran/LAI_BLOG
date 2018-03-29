@@ -41,7 +41,7 @@ renderModuleFactory 在模板中的 `<app>` 标记中渲染出哪个视图，并
 
 1. 提升在手机和低功耗设备上的性能
 
-1. 迅速显示出第一个页面
+1. 迅速显示出第首页
 
 ### 帮助网络爬虫（SEO）
 
@@ -614,3 +614,42 @@ export class HomeComponent implements OnInit, OnDestroy {
 - 在 `HomeComponent` 的构造函数中注入 `TransferState`
 - 在 `ngOnInit` 中根据 `this.state.get(KFCLIST_KEY, null as any)` 判断数据是否存在（不管是服务端还是客户端），存在就不再请求，不存在则请求数据并通过 `this.state.set(KFCLIST_KEY, data as any)` 存储传输数据
 - 在 `ngOnDestroy` 中根据当前是否客户端来决定是否将存储的数据进行删除
+
+## 客户端与服务端渲染对比
+
+最后，我们分别通过这三个原因来进行对比：
+
+1. 帮助网络爬虫（SEO）
+
+1. 提升在手机和低功耗设备上的性能
+
+1. 迅速显示出首页
+
+### 帮助网络爬虫（SEO）
+
+客户端渲染：
+
+![](https://note.youdao.com/yws/api/personal/file/5ED5C4F962C548FBB2169B7F33DF2BB7?method=download&shareKey=abc2046eb5f3f44cc3ef3bf04ef81644)
+
+服务端渲染：
+
+![](https://note.youdao.com/yws/api/personal/file/3ED0BB65D25C414AA1C6DCCB81C276DC?method=download&shareKey=2532ad7e720286120a4812a3f028ad05)
+
+从上面可以看到，服务端提前将信息渲染到返回的页面上，这样网络爬虫就能直接获取到信息了（网络爬虫基本不会解析javascript的）。
+
+### 提升在手机和低功耗设备上的性能
+
+这个原因通过上面就可以看出，对于一些低端的设备，直接显示页面总比要解析javascript性能高的多。
+
+### 迅速显示出首页
+
+同样在 Fast 3G 网络条件下进行测试
+
+客户端渲染：
+
+![](https://note.youdao.com/yws/api/personal/file/2FBFEABC2BF346D7A734662AFFAC6C70?method=download&shareKey=ea1e4ff1fbe754417398a07ac0ae9a78)
+
+服务端渲染：
+
+![](https://note.youdao.com/yws/api/personal/file/44DD5F1E08E54DE88ED63FDE351F8CFA?method=download&shareKey=b0f40607c6e4250df2fbb1d8d404c950)
+
