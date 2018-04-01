@@ -653,3 +653,45 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 ![](https://note.youdao.com/yws/api/personal/file/44DD5F1E08E54DE88ED63FDE351F8CFA?method=download&shareKey=b0f40607c6e4250df2fbb1d8d404c950)
 
+## 牢记几件事情
+
+ - 对于服务器软件包，您可能需要将第三方模块包含到`nodeExternals`白名单中
+
+ - **`window`**, **`document`**, **`navigator`** 以及其它的浏览器类型 - _不存在于服务端_ - 如果你直接使用，在服务端将无法正常工作。 以下几种方法可以让你的代码正常工作：
+
+    - 可以通过`PLATFORM_ID`标记注入的`Object`来检查当前平台是浏览器还是服务器，然后使用浏览器端特有的类型
+
+    ```typescript
+     import { PLATFORM_ID } from '@angular/core';
+     import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+
+     constructor(@Inject(PLATFORM_ID) private platformId: Object) { ... }
+
+     ngOnInit() {
+       if (isPlatformBrowser(this.platformId)) {
+          // 仅运行在浏览器端的代码
+          ...
+       }
+       if (isPlatformServer(this.platformId)) {
+         // 仅运行在服务端的代码
+         ...
+       }
+     }
+    ```
+
+     - 尽量**限制**或**避免**使用`setTimeout`。它会减慢服务器端的渲染过程。确保在组件的`ngOnDestroy`中删除它们
+
+     - 对于RxJs超时，请确保在成功时 _取消_ 它们的流，因为它们也会降低渲染速度。
+
+ - **不要直接操作nativeElement**，使用[Renderer2](https://angular.io/api/core/Renderer2)，从而可以跨平台改变应用视图。
+
+```typescript
+constructor(element: ElementRef, renderer: Renderer2) {
+  this.renderer.setStyle(element.nativeElement, 'font-size', 'x-large');
+}
+```
+
+ - 解决应用程序在服务器上运行XHR请求，并在客户端再次运行的问题
+    - 使用从服务器传输到客户端的缓存（TransferState）
+ - 清楚了解与DOM相关的属性和属性之间的差异
+ - 尽量让指令无状态。对于有状态指令，您可能需要提供一个属性，以反映相应属性的初始字符串值，例如img标签中的url。对于我们的native元素，src属性被反映为元素类型HTMLImageElement的src属性
