@@ -322,7 +322,7 @@ demo.component.scss：
 
 ![](https://note.youdao.com/yws/api/personal/file/653EFC5051FB4FBB98D24D8893D9347C?method=download&shareKey=0676a9e4a7dcbc59d86b1206ece9cdf1)
 
-### <ng-content> 不“产生”内容
+### `<ng-content>` 不“产生”内容
 
 #### 做个试验
 
