@@ -1,5 +1,5 @@
 ---
-title: Javascript之创建对象
+title: JavaScript之创建对象
 date: 2018-04-06 15:00:32
 tags:
 - Object
